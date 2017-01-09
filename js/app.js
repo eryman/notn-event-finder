@@ -39,7 +39,7 @@
                 var i = 0;
                 eventData.forEach(function(event){
                   model.eventsList.push(new Event(event));
-                  $('nav').append('<p>' + model.eventsList[i].description + '</p>');
+                  $('nav').append('<h3>' + model.eventsList[i].name + '</h3>');
                   i++
                 });
                 console.log(model.eventsList);
