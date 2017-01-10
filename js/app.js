@@ -22,6 +22,7 @@ var model = {
 
 var Event = function(data){
   this.name = data.name;
+  this.id = data.id;
   if (data.place){
     this.venue = data.place.name;
     this.address = data.place.location.city + ', ' + data.place.location.state;
@@ -51,7 +52,7 @@ var facebookView = {
             var i = 0;
             eventData.forEach(function(event){
               model.eventsList.push(new Event(event));
-              self.populateNav(model.eventsList[i]);
+              self.populateNav(model.eventsList[i], i);
               i++
             });
             console.log(model.eventsList);
@@ -66,22 +67,24 @@ var facebookView = {
     })
   },
   // Takes an event object, adds markup and appends to nav bar
-  populateNav: function(eventData){
-    $('nav').append('<div class="nav__item"></div>')
+  populateNav: function(eventData, i){
+    if (i % 2 == 0) {
+      $('nav').append('<div class="nav__item gray"></div>');
+    } else {
+      $('nav').append('<div class="nav__item"></div>');
+    }
     $('.nav__item:last').append('<h3>' + eventData.name + '</h3>');
     if(eventData.venue){
-      $('.nav__item:last').append('<p>' + eventData.venue + ' - <span>' + eventData.address + '</span></p>');
+      $('.nav__item:last').append('<p>' + eventData.venue + ' - <span>' + eventData.address + '</span>');
     }
     $('.nav__item:last').append('<p>' + eventData.date + '</p>');
     $('.nav__item:last').append('<p>' + eventData.description + '</p>');
+    $('.nav__item:last').append('<p>Click <a href="' + eventData.url + '">here</a> to visit Facebook event page!</p>');
+
   }
 } 
 
+// When the doc is ready, initialize facebook resources
 $(document).ready(function(){
   facebookView.init();
 })
-
-
-
-
-
