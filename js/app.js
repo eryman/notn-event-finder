@@ -34,6 +34,27 @@ var Event = function(data){
   //this.marker = a whole other mess of problems;
 };
 
+var helper = {
+  // Adds an event to model.eventsList
+  addToEventsList: function(event){
+    model.eventsList.push(event)
+  },
+  // Retrieves model.eventsList
+  getEventsList: function(){
+    return model.eventsList;
+  },
+  setMap: function() {
+    model.map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: 40.8649,
+        lng: -73.1302
+      },
+      zoom: 13,
+      styles: model.styles
+    });
+  },
+}
+
 var facebookView = {
   // Retrieves facebook resources, calls populateNav to populate the nav window
   init: function(){
@@ -51,11 +72,11 @@ var facebookView = {
             var eventData = response.events.data;
             var i = 0;
             eventData.forEach(function(event){
-              model.eventsList.push(new Event(event));
-              self.populateNav(model.eventsList[i], i);
+              helper.addToEventsList(new Event(event));
+              self.populateNav(helper.getEventsList()[i], i);
               i++
             });
-            console.log(model.eventsList);
+            console.log(helper.getEventsList());
           } else {
             window.alert('Could not load resources');
           }
@@ -83,6 +104,18 @@ var facebookView = {
 
   }
 } 
+
+var mapView = {
+    initMap: function() {
+        // Initialize the map, the list of markers, and the info window
+        helper.setMap();
+        //helper.setMarkers();
+        //helper.setInfowindow();
+    },
+    handleError: function() {
+        window.alert("Map could not be loaded.");
+    }
+};
 
 // When the doc is ready, initialize facebook resources
 $(document).ready(function(){

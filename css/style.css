@@ -82,11 +82,12 @@ h3 {
 }
 #map {
   bottom: 0px;
-  height: 100%;
+  height: calc(100% + 42px);
   width: 100%;
   position: absolute;
   right: 0px;
   overflow-y: hidden;
+  top: 0;
 }
 
 .options-box {
