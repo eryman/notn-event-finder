@@ -31,7 +31,7 @@ var Event = function(data){
   this.time = data.start_time.substring(10);
   this.description = data.description;
   this.url = 'https://www.facebook.com/events/' + data.id;
-  //this.marker = a whole other mess of problems;
+  this.marker = null;
 };
 
 var helper = {
@@ -53,6 +53,15 @@ var helper = {
       styles: model.styles
     });
   },
+  setMarkers: function(eventsList){
+    // For each item on eventsList
+      // Get name and city of each location
+      // Perform google places search with that info
+        // In call back method
+          // Create a marker with that location's coordinates
+          // Add that marker information to that event's marker field
+  },
+  setInfowindow: function(){}
 }
 
 var facebookView = {
@@ -109,8 +118,8 @@ var mapView = {
     initMap: function() {
         // Initialize the map, the list of markers, and the info window
         helper.setMap();
-        //helper.setMarkers();
-        //helper.setInfowindow();
+        helper.setMarkers();
+        helper.setInfowindow();
     },
     handleError: function() {
         window.alert("Map could not be loaded.");
@@ -121,3 +130,5 @@ var mapView = {
 $(document).ready(function(){
   facebookView.init();
 })
+
+// TODO: put initMap function at the end of facebookView.init callback function to make sure it doesn't load until facebook resources are retrieved.
