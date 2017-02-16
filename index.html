@@ -14,7 +14,7 @@
     <header class="header">
       <div class="header__inner">
         <h1 class="header__title">
-          Night of the Nerds
+        
           <br class="header__br">
           Event Finder
         </h1>
@@ -28,7 +28,10 @@
 
     <div class="container">
 
-      <nav id="drawer" class="nav">
+      <nav id="drawer" class="open">
+        <button id="upcoming-button">Upcoming Events</button>
+        <button id="previous-button">Previous Events</button>
+        <div class="nav"></div>
       </nav>
 
       <main>
@@ -51,6 +54,8 @@
 
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYdBktNPEc-mVhl3zKqAUTWHWvM1QJCPU&v=3&libraries=places,drawing&callback=mapView.initMap" onerror="mapView.handleError()"></script>
-    
+
+
+
   </body>
 </html>
